@@ -632,51 +632,66 @@
 
     <!-- DIVIDER -->
     <div style="padding: 1rem 0;">
-      <p class="section-label" style="margin-bottom: 0;">Coming Soon</p>
-      <p style="font-size: 0.88rem; color: var(--text-dim);">Independent projects showcasing applied SWE, AI, and ML engineering skills.</p>
+      <p class="section-label" style="margin-bottom: 0;">Independent Projects</p>
     </div>
 
-    <!-- 4. SWE Project (Placeholder) -->
-    <div class="project-card swe" style="opacity: 0.5; cursor: default;">
+    <!-- 4. JobTracker API (SWE) -->
+    <a class="project-card swe" href="https://github.com/tejasxsingh/jobtracker-api" target="_blank">
       <div class="card-header">
         <span class="card-tag tag-swe">Software Engineering</span>
+        <span class="card-arrow">&nearr;</span>
       </div>
-      <h3 class="card-title">Full-Stack Application</h3>
-      <p class="card-desc">
-        A production-grade full-stack application with REST API design, database modeling, authentication, containerized deployment, and CI/CD pipelines. Details coming soon.
+      <h3 class="card-title">JobTracker API</h3>
+      <p class="card-role">
+        Full-Stack Backend Application
       </p>
+      <ul class="card-bullets">
+        <li>REST API for tracking job applications through every stage of the hiring pipeline, from saved to offer to rejected</li>
+        <li>JWT-based authentication with bcrypt password hashing, per-user data isolation, and OAuth2 token flow</li>
+        <li>Full CRUD with filtering by status and company, pagination, and an analytics endpoint that breaks down application counts by stage</li>
+        <li>Dockerized with Docker Compose (API + PostgreSQL), GitHub Actions CI pipeline, and pytest integration tests</li>
+      </ul>
       <div class="card-tech">
         <span>Python</span>
         <span>FastAPI</span>
         <span>PostgreSQL</span>
+        <span>SQLAlchemy</span>
         <span>Docker</span>
-        <span>Kubernetes</span>
-        <span>CI/CD</span>
-        <span>AWS</span>
+        <span>JWT Auth</span>
+        <span>pytest</span>
         <span>GitHub Actions</span>
+        <span>CI/CD</span>
       </div>
-    </div>
+    </a>
 
-    <!-- 5. AI Engineering Project (Placeholder) -->
-    <div class="project-card ml" style="opacity: 0.5; cursor: default;">
+    <!-- 5. RAG Research Assistant (AI Engineering) -->
+    <a class="project-card ml" href="https://github.com/tejasxsingh/rag-research-assistant" target="_blank">
       <div class="card-header">
         <span class="card-tag tag-ml">AI Engineering</span>
+        <span class="card-arrow">&nearr;</span>
       </div>
-      <h3 class="card-title">AI-Powered Application</h3>
-      <p class="card-desc">
-        An end-to-end AI application featuring RAG pipelines, agentic workflows, vector database integration, and LLM orchestration deployed to production. Details coming soon.
+      <h3 class="card-title">RAG Research Assistant</h3>
+      <p class="card-role">
+        Retrieval-Augmented Generation Application
       </p>
+      <ul class="card-bullets">
+        <li>Upload research papers as PDFs, ask natural language questions, and get answers grounded in the actual paper content with page-number citations</li>
+        <li>Documents are split into chunks, embedded with OpenAI's text-embedding-3-small, and stored in a ChromaDB vector store with cosine similarity retrieval</li>
+        <li>LangChain orchestration pipeline feeds retrieved context into GPT-4o-mini with a system prompt that enforces citation and honesty about missing information</li>
+        <li>Dockerized FastAPI backend with persistent vector storage, tested with mocked LLM calls so CI runs without API keys</li>
+      </ul>
       <div class="card-tech">
         <span>Python</span>
         <span>LangChain</span>
-        <span>LangGraph</span>
-        <span>Vector DB</span>
+        <span>ChromaDB</span>
         <span>OpenAI API</span>
         <span>FastAPI</span>
         <span>Docker</span>
-        <span>Cloud Deployment</span>
+        <span>RAG</span>
+        <span>Vector DB</span>
+        <span>pytest</span>
       </div>
-    </div>
+    </a>
 
     <!-- 6. ML Engineering Project (Placeholder) -->
     <div class="project-card research" style="opacity: 0.5; cursor: default;">
