@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tejas Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0c;
+      --bg-card: #111114;
+      --bg-card-hover: #18181c;
+      --border: #1e1e24;
+      --border-accent: #2a2a34;
+      --text: #e8e6e3;
+      --text-muted: #8a8a96;
+      --text-dim: #5a5a66;
+      --accent-research: #4f8ff7;
+      --accent-swe: #34d399;
+      --accent-ml: #f59e0b;
+      --accent-research-bg: rgba(79, 143, 247, 0.08);
+      --accent-swe-bg: rgba(52, 211, 153, 0.08);
+      --accent-ml-bg: rgba(245, 158, 11, 0.08);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 12, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+    .nav-logo span { color: var(--text-dim); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,143,247,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(52,211,153,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+    .hero h1 .line-2 {
+      color: var(--text-muted);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+    .hero-links a {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.25s;
+      letter-spacing: 0.3px;
+    }
+    .hero-links a:hover {
+      color: var(--text);
+      border-color: var(--border-accent);
+      background: var(--bg-card);
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+    }
+    .projects-subsection {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* ---- PROJECT CARDS ---- */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .project-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+    .project-card.research::before { background: linear-gradient(90deg, var(--accent-research), transparent); }
+    .project-card.swe::before { background: linear-gradient(90deg, var(--accent-swe), transparent); }
+    .project-card.ml::before { background: linear-gradient(90deg, var(--accent-ml), transparent); }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .tag-research { color: var(--accent-research); background: var(--accent-research-bg); }
+    .tag-swe { color: var(--accent-swe); background: var(--accent-swe-bg); }
+    .tag-ml { color: var(--accent-ml); background: var(--accent-ml-bg); }
+
+    .card-arrow {
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+    .project-card:hover .card-arrow { transform: translate(3px, -3px); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-tech span {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+    .card-role {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      line-height: 1.7;
+    }
+    .card-role a {
+      color: var(--accent-research);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(79,143,247,0.3);
+      transition: border-color 0.2s;
+    }
+    .card-role a:hover {
+      border-color: var(--accent-research);
+    }
+    .card-role .swe-link {
+      color: var(--accent-swe);
+      border-bottom-color: rgba(52,211,153,0.3);
+    }
+    .card-role .swe-link:hover {
+      border-color: var(--accent-swe);
+    }
+    .card-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem 0;
+    }
+    .card-bullets li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .card-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+    .card-bullets a {
+      color: var(--accent-research);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(79,143,247,0.3);
+    }
+    .card-metrics {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- DIVIDER ---- */
+    .divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ---- ABOUT GRID ---- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+    .about-text p + p { margin-top: 1rem; }
+    .about-details { display: flex; flex-direction: column; gap: 1.5rem; }
+    .detail-group h4 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .detail-group p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tech-list span {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* ---- EXPERIENCE ---- */
+    .experience-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      padding-top: 0.15rem;
+    }
+    .exp-role {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .exp-org {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .exp-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .hero h1 { font-size: 2.2rem; }
+      section { padding: 4rem 1.5rem; }
+      .project-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">tejas<span>singh</span></div>
+    <div class="nav-links">
+      <a href="#projects">Experience</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/tejasxsingh" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/tejassingh23" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Computational Mathematics @ UBC</p>
+    <h1>
+      Tejas Singh
+      <br>
+      <span class="line-2">AI, ML &amp; Software Engineering</span>
+    </h1>
+    <p class="hero-desc">
+      Fourth-year Computational Mathematics student at the University of British Columbia. Building production ML systems, AI-powered applications, and data pipelines across quantitative finance, computational biology, and full-stack software engineering.
+    </p>
+    <div class="hero-links">
+      <a href="#projects">View Projects</a>
+      <a href="https://github.com/tejasxsingh" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/tejassingh23" target="_blank">LinkedIn</a>
+      <a href="mailto:tejassingh@alumni.ubc.ca">Contact</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-title">Experience</h2>
+  <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: -2rem; margin-bottom: 2.5rem;">Click to open code / link</p>
+
+  <div class="projects-grid">
+
+    <h3 class="projects-subsection">Research &amp; Internship Projects</h3>
+
+    <!-- 1. ViT Finance Research -->
+    <a class="project-card research" href="https://github.com/tejasxsingh" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-research">Quantitative Finance Research</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">ViT Stock Return Prediction Pipeline</h3>
+      <p class="card-role">
+        Data Assistant (Quant Finance) &middot; Jan &mdash; Apr 2026<br>
+        <a href="https://www.sauder.ubc.ca/" target="_blank">UBC Sauder School of Business</a> &middot; Sponsored by <a href="https://cclinvest.cclgroup.com/" target="_blank">Connor, Clark &amp; Lunn Financial Group</a><br>
+        Supervised by <a href="https://www.janbena.com/" target="_blank">Prof. Jan Bena</a>, <a href="https://www.sauder.ubc.ca/people/jose-pizarro" target="_blank">Prof. Jose Pizarro</a> &amp; <a href="https://www.sauder.ubc.ca/people/james-shou" target="_blank">Prof. James Shou</a>
+      </p>
+      <div class="card-metrics">
+        <div class="metric">
+          <span class="metric-value">~28M</span>
+          <span class="metric-label">Images Generated</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">54M+</span>
+          <span class="metric-label">Rows CRSP Data</span>
+        </div>
+      </div>
+      <ul class="card-bullets">
+        <li>End-to-end image generation pipeline for a Vision Transformer-based stock return prediction system following Byun et al. (2025)</li>
+        <li>Preprocessed 54M+ rows of CRSP daily stock data and generated pixel-level candlestick chart images with binary 20-day forward return labeling</li>
+        <li>Implemented stock-split correction via WRDS DlyFacPrc to ensure label accuracy across corporate actions</li>
+        <li>Built chunked processing with skip-already-generated logic to handle Google Colab free-tier memory and runtime constraints</li>
+        <li>Targeting deployment for CC&amp;L asset management portfolio construction strategies</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>PyTorch</span>
+        <span>Vision Transformer</span>
+        <span>Google Colab</span>
+        <span>WRDS/CRSP</span>
+        <span>NumPy</span>
+        <span>Pandas</span>
+        <span>Pillow</span>
+        <span>Data Pipelines</span>
+      </div>
+    </a>
+
+    <!-- 2. sMBPLS CompBio Research -->
+    <a class="project-card research" href="https://github.com/tejasxsingh/smbpls-research-chli" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-research">Computational Biology Research</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">sMBPLS: Sparse Multi-Block Partial Least Squares</h3>
+      <p class="card-role">
+        Machine Learning Engineer &middot; Sep 2025 &mdash; May 2026<br>
+        <a href="https://www.hli.ubc.ca/" target="_blank">Centre for Heart Lung Innovation</a> &middot; <a href="https://cbl-hli.med.ubc.ca/" target="_blank">UBC Computational Biology Lab</a><br>
+        Supervised by <a href="https://www.hli.ubc.ca/researchers/amrit-singh/" target="_blank">Dr. Amrit Singh</a>
+      </p>
+      <div class="card-metrics">
+        <div class="metric">
+          <span class="metric-value">R&sup2; &gt; 0.99</span>
+          <span class="metric-label">Model Accuracy</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">50</span>
+          <span class="metric-label">Seed Ablation Runs</span>
+        </div>
+      </div>
+      <ul class="card-bullets">
+        <li>PyTorch implementation of sparse Multi-Block Partial Least Squares for multi-omics data integration in biomarker discovery</li>
+        <li>Core hypothesis: enforcing sparsity across biological data blocks (genomics, proteomics, metabolomics) isolates the most predictive molecular signatures for diseases like heart failure and asthma while filtering out noise</li>
+        <li>Achieved R-squared above 0.99 across 50-seed ablation studies on simulated and real datasets, validating model robustness</li>
+        <li>Contributed to building and releasing the <a href="https://github.com/tejasxsingh/smbpls-research-chli" target="_blank">smbpls Python package</a>, enabling researchers to run sparse multi-block integration on their own omics datasets out of the box</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>PyTorch</span>
+        <span>scVI</span>
+        <span>NumPy</span>
+        <span>scikit-learn</span>
+        <span>Bioinformatics</span>
+        <span>LaTeX</span>
+        <span>Multi-omics</span>
+      </div>
+    </a>
+
+    <!-- 3. CoDHerS -->
+    <a class="project-card swe" href="https://codhers.ubc.ca/" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-swe">Software Engineering</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">CoDHerS Platform &mdash; Collaborative Digital Heritage Studio</h3>
+      <p class="card-role">
+        Software Engineer (Work Learn) &middot; Sep &mdash; Dec 2025<br>
+        <a href="https://codhers.ubc.ca/" target="_blank" class="swe-link">CoDHerS</a>, <a href="https://asia.ubc.ca/" target="_blank" class="swe-link">UBC Dept. of Asian Studies</a>
+      </p>
+      <ul class="card-bullets">
+        <li>Full-stack software engineer at UBC's Collaborative Digital Heritage Studio, supporting global Indigenous and minoritized communities in preserving endangered cultural heritage</li>
+        <li>Built and maintained the studio's Django-based web platform and developed digital archiving tools</li>
+        <li>Worked across the full development lifecycle from design through deployment</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>Django</span>
+        <span>JavaScript</span>
+        <span>HTML/CSS</span>
+        <span>PostgreSQL</span>
+        <span>Git</span>
+        <span>Full Stack</span>
+        <span>REST APIs</span>
+      </div>
+    </a>
+
+    <!-- 4. Nishan Transport -->
+    <a class="project-card swe" href="https://nishantransport.com" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-swe">Internship</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">Nishan Transport Inc.</h3>
+      <p class="card-role">
+        Software Engineer, Technology Analytics &middot; Sep &mdash; Dec 2024<br>
+        <a href="https://nishantransport.com" target="_blank" class="swe-link">Nishan Transport Inc.</a> &middot; Cross-border freight and logistics
+      </p>
+      <ul class="card-bullets">
+        <li>Built internal analytics tooling and automated reporting pipelines to support fleet operations and business decision-making across 200+ power units and 300+ trailers</li>
+        <li>Developed dashboards and ETL workflows for shipment tracking, delivery performance, and stakeholder-facing reports</li>
+        <li>Worked across software development and data analysis to streamline operational visibility for LTL/FTL cross-border logistics</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>SQL</span>
+        <span>Pandas</span>
+        <span>Data Pipelines</span>
+        <span>ETL</span>
+        <span>Dashboards</span>
+        <span>Analytics</span>
+      </div>
+    </a>
+
+    <!-- DIVIDER -->
+    <div style="padding: 1.5rem 0 0.5rem;">
+      <h3 class="projects-subsection">Independent Projects</h3>
+    </div>
+
+    <!-- 4. JobTracker API (SWE) -->
+    <a class="project-card swe" href="https://github.com/tejasxsingh/jobtracker-api" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-swe">Software Engineering</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">JobTracker API</h3>
+      <p class="card-role">
+        Full-Stack Backend Application
+      </p>
+      <ul class="card-bullets">
+        <li>REST API for tracking job applications through every stage of the hiring pipeline, from saved to offer to rejected</li>
+        <li>JWT-based authentication with bcrypt password hashing, per-user data isolation, and OAuth2 token flow</li>
+        <li>Full CRUD with filtering by status and company, pagination, and an analytics endpoint that breaks down application counts by stage</li>
+        <li>Dockerized with Docker Compose (API + PostgreSQL), GitHub Actions CI pipeline, and pytest integration tests</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>FastAPI</span>
+        <span>PostgreSQL</span>
+        <span>SQLAlchemy</span>
+        <span>Docker</span>
+        <span>JWT Auth</span>
+        <span>pytest</span>
+        <span>GitHub Actions</span>
+        <span>CI/CD</span>
+      </div>
+    </a>
+
+    <!-- 5. RAG Research Assistant (AI Engineering) -->
+    <a class="project-card ml" href="https://github.com/tejasxsingh/rag-research-assistant" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-ml">AI Engineering</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">RAG Research Assistant</h3>
+      <p class="card-role">
+        Retrieval-Augmented Generation Application
+      </p>
+      <ul class="card-bullets">
+        <li>Upload research papers as PDFs, ask natural language questions, and get answers grounded in the actual paper content with page-number citations</li>
+        <li>Documents are split into chunks, embedded with OpenAI's text-embedding-3-small, and stored in a ChromaDB vector store with cosine similarity retrieval</li>
+        <li>LangChain orchestration pipeline feeds retrieved context into GPT-4o-mini with a system prompt that enforces citation and honesty about missing information</li>
+        <li>Dockerized FastAPI backend with persistent vector storage, tested with mocked LLM calls so CI runs without API keys</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>LangChain</span>
+        <span>ChromaDB</span>
+        <span>OpenAI API</span>
+        <span>FastAPI</span>
+        <span>Docker</span>
+        <span>RAG</span>
+        <span>Vector DB</span>
+        <span>pytest</span>
+      </div>
+    </a>
+
+    <!-- 6. Adaptive Factor Model (Quant/Data Science) -->
+    <a class="project-card research" href="https://github.com/tejasxsingh/adaptive-factor-model" target="_blank">
+      <div class="card-header">
+        <span class="card-tag tag-research">Quantitative Finance</span>
+        <span class="card-arrow">&nearr;</span>
+      </div>
+      <h3 class="card-title">Adaptive Factor Model with Regime Detection</h3>
+      <p class="card-role">
+        Regime-Dependent Fama-French Factor Analysis &middot; Python + R
+      </p>
+      <ul class="card-bullets">
+        <li>Fits a Gaussian Hidden Markov Model on daily market returns to classify trading days into volatility regimes (low, medium, high), then estimates separate Fama-French + Momentum factor exposures per regime</li>
+        <li>Chow test confirms factor loadings are statistically different across regimes: momentum flips negative in high-vol states, market beta spikes to ~1.3, and value exposure doubles</li>
+        <li>Full residual diagnostics per regime using Newey-West HAC standard errors, Durbin-Watson, Ljung-Box, and Breusch-Pagan tests</li>
+        <li>Generates 5 publication-quality plots: regime-colored cumulative returns, factor loading comparisons with 95% CI, rolling Sharpe ratios, regime distribution, and annualized alpha by regime</li>
+        <li>Dual implementation in Python (hmmlearn, statsmodels, scipy) and R (depmixS4, lmtest, sandwich, ggplot2) with a built-in data simulator and 14-test pytest suite</li>
+      </ul>
+      <div class="card-tech">
+        <span>Python</span>
+        <span>R</span>
+        <span>statsmodels</span>
+        <span>hmmlearn</span>
+        <span>scipy</span>
+        <span>ggplot2</span>
+        <span>Newey-West</span>
+        <span>HMM</span>
+        <span>Fama-French</span>
+        <span>pytest</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <h2 class="section-title">Background</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Fourth-year Computational Mathematics student at UBC. I like building things end-to-end and understanding how systems work under the hood rather than treating them as black boxes. Most of my work sits at the intersection of writing production code and applying mathematical thinking to real problems.
+      </p>
+      <p>
+        My ML and AI engineering skills come from a mix of formal coursework in linear algebra, statistics, and optimization, research positions where I've shipped real PyTorch models and data pipelines, and structured programs like Andrew Ng's ML Specialization and a Bioinformatics Specialization. I pick up new tools by building with them and document what I learn along the way.
+      </p>
+    </div>
+    <div class="about-details">
+      <div class="detail-group">
+        <h4>Education</h4>
+        <p style="color: var(--text); font-weight: 500; font-size: 1rem;">B.Sc. Mathematics</p>
+        <p>University of British Columbia (Expected 2027)</p>
+      </div>
+      <div class="detail-group">
+        <h4>Certifications</h4>
+        <p>Google Data Analytics &middot; Andrew Ng ML Specialization &middot; MIT Introduction to Modern Finance &middot; Bioinformatics Specialization</p>
+      </div>
+      <div class="detail-group">
+        <h4>AI / ML Engineering</h4>
+        <div class="tech-list">
+          <span>PyTorch</span>
+          <span>scikit-learn</span>
+          <span>LangChain</span>
+          <span>LangGraph</span>
+          <span>Hugging Face</span>
+          <span>Vector DBs</span>
+          <span>RAG Pipelines</span>
+          <span>MLflow</span>
+          <span>Weights &amp; Biases</span>
+        </div>
+      </div>
+      <div class="detail-group">
+        <h4>Software Engineering</h4>
+        <div class="tech-list">
+          <span>Python</span>
+          <span>JavaScript</span>
+          <span>SQL</span>
+          <span>FastAPI</span>
+          <span>Docker</span>
+          <span>Kubernetes</span>
+          <span>AWS</span>
+          <span>GCP</span>
+          <span>CI/CD</span>
+          <span>Git</span>
+          <span>PostgreSQL</span>
+        </div>
+      </div>
+      <div class="detail-group">
+        <h4>Statistics &amp; Mathematics</h4>
+        <div class="tech-list">
+          <span>Hypothesis Testing</span>
+          <span>Regression Analysis</span>
+          <span>Time Series</span>
+          <span>Bayesian Methods</span>
+          <span>PCA / Dimensionality Reduction</span>
+          <span>Hidden Markov Models</span>
+          <span>Linear Algebra</span>
+          <span>Optimization</span>
+          <span>Stochastic Processes</span>
+        </div>
+      </div>
+      <div class="detail-group">
+        <h4>Data Science &amp; Analysis</h4>
+        <div class="tech-list">
+          <span>Pandas</span>
+          <span>NumPy</span>
+          <span>Matplotlib</span>
+          <span>R</span>
+          <span>ggplot2</span>
+          <span>statsmodels</span>
+          <span>Tableau</span>
+          <span>LaTeX</span>
+          <span>Data Visualization</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Tejas Singh</p>
+  <div class="footer-links">
+    <a href="https://github.com/tejasxsingh" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/tejassingh23" target="_blank">LinkedIn</a>
+    <a href="mailto:tejassingh@alumni.ubc.ca">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>
