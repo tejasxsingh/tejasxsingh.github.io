@@ -693,26 +693,36 @@
       </div>
     </a>
 
-    <!-- 6. ML Engineering Project (Placeholder) -->
-    <div class="project-card research" style="opacity: 0.5; cursor: default;">
+    <!-- 6. Adaptive Factor Model (Quant/Data Science) -->
+    <a class="project-card research" href="https://github.com/tejasxsingh/adaptive-factor-model" target="_blank">
       <div class="card-header">
-        <span class="card-tag tag-research">ML Engineering</span>
+        <span class="card-tag tag-research">Quantitative Finance</span>
+        <span class="card-arrow">&nearr;</span>
       </div>
-      <h3 class="card-title">ML Pipeline &amp; Model Deployment</h3>
-      <p class="card-desc">
-        A complete ML pipeline covering data ingestion, feature engineering, model training, experiment tracking, containerized serving, and production monitoring. Details coming soon.
+      <h3 class="card-title">Adaptive Factor Model with Regime Detection</h3>
+      <p class="card-role">
+        Regime-Dependent Fama-French Factor Analysis &middot; Python + R
       </p>
+      <ul class="card-bullets">
+        <li>Fits a Gaussian Hidden Markov Model on daily market returns to classify trading days into volatility regimes (low, medium, high), then estimates separate Fama-French + Momentum factor exposures per regime</li>
+        <li>Chow test confirms factor loadings are statistically different across regimes: momentum flips negative in high-vol states, market beta spikes to ~1.3, and value exposure doubles</li>
+        <li>Full residual diagnostics per regime using Newey-West HAC standard errors, Durbin-Watson, Ljung-Box, and Breusch-Pagan tests</li>
+        <li>Generates 5 publication-quality plots: regime-colored cumulative returns, factor loading comparisons with 95% CI, rolling Sharpe ratios, regime distribution, and annualized alpha by regime</li>
+        <li>Dual implementation in Python (hmmlearn, statsmodels, scipy) and R (depmixS4, lmtest, sandwich, ggplot2) with a built-in data simulator and 14-test pytest suite</li>
+      </ul>
       <div class="card-tech">
         <span>Python</span>
-        <span>PyTorch</span>
-        <span>scikit-learn</span>
-        <span>MLflow</span>
-        <span>Weights &amp; Biases</span>
-        <span>Docker</span>
-        <span>Kubernetes</span>
-        <span>AWS/GCP</span>
+        <span>R</span>
+        <span>statsmodels</span>
+        <span>hmmlearn</span>
+        <span>scipy</span>
+        <span>ggplot2</span>
+        <span>Newey-West</span>
+        <span>HMM</span>
+        <span>Fama-French</span>
+        <span>pytest</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
